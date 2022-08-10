@@ -5,7 +5,7 @@ on:
     - master
 
 env:
-  FIRST_NAME: Mona
+  FIRST_NAME: u0_a241
 jobs:
   build:
     runs-on: ubuntu-latest
