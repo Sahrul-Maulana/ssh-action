@@ -21,4 +21,8 @@ jobs:
           host: ${{ secrets.HOST }}
           user: root
           key: ${{ secrets.PRIVATE_KEY}}
-          pass: ${{ secrets.PASS }}
+#          pass: ${{ secrets.PASS }}
+          args: "-tt"
+      - name: Check on failures
+        if: ${{ failure() }}
+        run: echo "must fail"
