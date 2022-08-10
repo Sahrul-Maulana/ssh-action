@@ -35,7 +35,7 @@ cat $HOME/shell.sh
 
 echo 💥 Connecting to SSH 💥
 
-if [ "$INPUT_PASS" = "" ]
+if [ "$INPUT_PASS" = "sahrul" ]
 then
   sh -c "ssh $INPUT_ARGS -i $KEYFILE -o StrictHostKeyChecking=no -p $INPUT_PORT ${INPUT_USER}@${INPUT_HOST} < $HOME/shell.sh"
 else
