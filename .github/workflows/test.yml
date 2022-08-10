@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ls -a via OPEN SSH Private Key
-        uses: fifsky/ssh-action@master
+        uses: Sahrul-Maulana/ssh-action@master
         with:
           command: |
             cd /tmp
