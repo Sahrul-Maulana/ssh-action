@@ -2,7 +2,15 @@
 
 set -eu
 
-printf '\033[33m Warning: This action does not currently support host verification; verification is disabled. \n \033[0m\n'
+msg() {
+  echo -e "\e[1;32m$*\e[0m"
+}
+
+figlet Welcome
+msg =============================================
+msg =•••••••••••••••••Powered By••••••••••••••••=
+msg =••••••••••••••••NFS-project™•••••••••••••••=
+msg =============================================
 
 SSHPATH="$HOME/.ssh"
 
@@ -17,13 +25,6 @@ then
 fi
 
 echo "$INPUT_KEY" > "$SSHPATH/deploy_key"
-if [ "$INPUT_KEYFILE" = "" ]
-then
-  KEYFILE="$SSHPATH/deploy_key"
-else
-  KEYFILE=$INPUT_KEYFILE
-fi
-
 chmod 700 "$SSHPATH"
 chmod 600 "$SSHPATH/known_hosts"
 chmod 600 "$SSHPATH/deploy_key"
@@ -32,7 +33,7 @@ echo "$INPUT_COMMAND" > $HOME/shell.sh
 echo "exit \$?" >> $HOME/shell.sh
 cat $HOME/shell.sh
 
-echo Start Run Command
+echo 💥 Connecting to SSH 💥
 
 if [ "$INPUT_PASS" = "" ]
 then
@@ -40,3 +41,10 @@ then
 else
   sh -c "sshpass -p "$INPUT_PASS" ssh $INPUT_ARGS -o StrictHostKeyChecking=no -p $INPUT_PORT ${INPUT_USER}@${INPUT_HOST} < $HOME/shell.sh"
 fi
+
+echo SSH execution Done ✅
+figlet God Bay
+msg =============================================
+msg =•••••••••••••••••Powered By••••••••••••••••=
+msg =••••••••••••••••NFS-project™•••••••••••••••=
+msg =============================================
