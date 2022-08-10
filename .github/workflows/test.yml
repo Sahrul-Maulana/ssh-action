@@ -1,28 +1,25 @@
 name: test
 on:
+  workflow_dispatch:
   push:
-    branches:
-    - master
+defaults:
+  run:
+    shell: bash
 
-env:
-  FIRST_NAME: u0_a241
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: ls -a via OPEN SSH Private Key
+      - name: Test
         uses: Sahrul-Maulana/ssh-action@master
         with:
-          command: |
-            cd /tmp
-            ls -a
-            echo "env_var:$FIRST_NAME"
-            exit 1
           host: ${{ secrets.HOST }}
-          user: root
+          user: ${{ secrets.USER }}
+          pass: ${{ secrets.PASSWORD }}
           key: ${{ secrets.PRIVATE_KEY}}
-#          pass: ${{ secrets.PASS }}
           args: "-tt"
-      - name: Check on failures
-        if: ${{ failure() }}
-        run: echo "must fail"
+          command: |
+             env
+             cd $HOME
+             curl -s -X POST "https://api.telegram.org/bot${tg_token}/sendMessage" -d chat_id="${tg_id}" -d "disable_web_page_preview=true" -d "parse_mode=html" -d text="Hallo Gaes.%0A %0ALagi update tool Asem.."
+             
